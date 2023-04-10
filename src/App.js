@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ConfigProvider, Layout } from "antd";
+import MainHeader from "./components/layout/MainHeader";
+import SideMenu from "./components/layout/SideMenu";
+import Footer from "./components/layout/Footer";
+import Location from "./pages/Location";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#2b7b00",
+        },
+      }}
+    >
+      <Router>
+        <Layout>
+          <MainHeader />
+          <Layout>
+            <SideMenu />
+            <Layout className="main-content">
+              <Routes>
+                <Route path="/" element={<Location />} />
+              </Routes>
+              <Footer />
+            </Layout>
+          </Layout>
+        </Layout>
+      </Router>
+    </ConfigProvider>
   );
 }
 
